@@ -15,7 +15,7 @@ function HomePage() {
       return;
     }
     const verifyResponse = await axios.post(
-      "http://localhost:5000/api/auth/verify",
+      "https://random-blogs.onrender.com/api/auth/verify",
       { token }
     );
     if (verifyResponse.status === 200) {
@@ -28,7 +28,7 @@ function HomePage() {
     try {
       let token = await verify();
 
-      const blogsResponse = await axios.get("http://localhost:5000/api/blogs", {
+      const blogsResponse = await axios.get("https://random-blogs.onrender.com/api/blogs", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -50,7 +50,7 @@ function HomePage() {
       let token = await verify();
       console.log("handle delte", token);
       const response = await axios.delete(
-        `http://localhost:5000/api/blogs/delete/${id}`,
+        `https://random-blogs.onrender.com/api/blogs/delete/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

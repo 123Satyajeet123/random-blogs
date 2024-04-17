@@ -24,7 +24,7 @@ function BlogPage() {
       const token = localStorage.getItem("token");
       console.log(blogData);
       const response = await axios.post(
-        "http://localhost:5000/api/blogs/create",
+        "https://random-blogs.onrender.com/api/blogs/create",
         blogData,
         {
           headers: {

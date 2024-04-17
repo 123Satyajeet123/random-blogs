@@ -22,7 +22,7 @@ function ViewBlogPage() {
   const fetchBlog = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/blogs/${id}`,
+        `https://random-blogs.onrender.com/api/blogs/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -46,7 +46,7 @@ function ViewBlogPage() {
     }
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/blogs/update/${id}`,
+        `https://random-blogs.onrender.com/api/blogs/update/${id}`,
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },

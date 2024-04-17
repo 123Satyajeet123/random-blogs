@@ -30,7 +30,7 @@ function LoginPage() {
     try {
       // Attempt to log in by sending a POST request to your authentication API
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://random-blogs.onrender.com/api/auth/login",
         userDetails
       );
       if (response.data.token) {
