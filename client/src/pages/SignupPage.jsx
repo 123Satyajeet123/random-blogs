@@ -27,12 +27,19 @@ function SignupPage() {
       return;
     }
 
+    if (userDetails.password.length < 7) {
+      alert("Password must be at least 7 characters long");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "https://random-blogs.onrender.com/api/auth/signup",
         userDetails
       );
-      console.log(response);
+
+      console.log("response", response);
+
       if (response.status == 200) {
         navigate("/login");
       }
