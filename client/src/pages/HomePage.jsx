@@ -37,7 +37,6 @@ function HomePage() {
         }
       );
 
-      console.log(blogsResponse.data)
       if (blogsResponse.data && blogsResponse.data.length > 0) {
         setBlogs(blogsResponse.data);
       } else {
@@ -109,7 +108,7 @@ function HomePage() {
             <h3>{blog.title}</h3>
             <p>{blog.content.substring(0, 100)}...</p>
             <p>{blog.author}</p>
-            <p>{blog.updatedAt.slice(10)}</p>
+            <p>{blog.updatedAt.substring(0, 10)}</p>
 
             <Link to={`/blog/${blog._id}`}>
               <button>View</button>
