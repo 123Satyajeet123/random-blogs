@@ -34,7 +34,7 @@ function BlogPage() {
       );
       if (response.status === 200) {
         console.log("Blog created successfully:", response.data);
-        navigate("/home"); // Redirect to the home page after successful creation
+        navigate("/"); // Redirect to the home page after successful creation
       } else {
         console.error("Failed to create blog:", response.data);
       }

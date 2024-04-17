@@ -38,7 +38,7 @@ function LoginPage() {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data.user.id); // Store user ID during login
 
-        navigate("/home");
+        navigate("/");
       } else {
         throw new Error("Token not provided");
       }
