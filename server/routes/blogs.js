@@ -4,16 +4,11 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    // Retrieve all blogs from the database
     const blogs = await Blog.find({});
-    // Send the array of blogs back to the client
-    res.status(200).json(blogs);
+
+    return res.status(200).json(blogs);
   } catch (error) {
-    // Handle potential errors that might occur during fetching data from the database
-    console.error("Error fetching blogs:", error);
-    res
-      .status(500)
-      .json({ message: "Error fetching blogs", error: error.message });
+    return res.status(500).json({ message: "Error fetching blogs" });
   }
 });
 router.get("/:id", async (req, res) => {
@@ -36,7 +31,7 @@ router.get("/:id", async (req, res) => {
 router.post("/create", async (req, res) => {
   const { title, content } = req.body;
   console.log(req.user);
-  const authorId = req.user.id; // ID of the user, assuming _id is the field where user ID is stored
+  const authorId = req.user.id;
 
   const author = req.user.name;
 
@@ -46,10 +41,7 @@ router.post("/create", async (req, res) => {
     console.log("blog created");
     return res.status(200).json(blog);
   } catch (error) {
-    console.log("Error in saving blog:", error); // Log the error to see what went wrong
-    res
-      .status(400)
-      .json({ message: "Error creating blog", error: error.message });
+    return res.status(400).json({ message: "Error creating blog" });
   }
 });
 
@@ -59,27 +51,21 @@ router.put("/update/:id", async (req, res) => {
 
   try {
     const blog = await Blog.findOneAndUpdate(
-      { _id: id, authorId: req.user.id }, // Make sure it matches your schema fields
+      { _id: id, authorId: req.user.id },
       { title, content },
       { new: true }
     );
 
-    console.log(blog)
     if (!blog) {
-      return res
-        .status(404)
-        .json({ message: "Blog not found or user not authorized" });
+      return res.status(404).json({ message: "Blog not found" });
     }
 
-    console.log("done")
-    return res.status(200).json({"success":"true"});
+    console.log("done");
+    return res.status(200).json({ success: "true" });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error updating blog", error: error.message });
+    return res.status(500).json({ message: "Error updating blog" });
   }
 });
-
 
 router.delete("/delete/:id", async (req, res) => {
   const blog = await Blog.findById(req.params.id);
@@ -89,18 +75,14 @@ router.delete("/delete/:id", async (req, res) => {
   }
 
   if (blog.authorId.toString() !== req.user.id.toString()) {
-    return res
-      .status(403)
-      .json({ message: "Unauthorized to delete this blog" });
+    return res.status(403).json({ message: "Unauthorized" });
   }
 
   try {
     await Blog.findOneAndDelete({ _id: req.params.id });
-    res.status(200).json({ message: "Blog deleted successfully" });
+    return res.status(200).json({ message: "Blog deleted successfully" });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Failed to delete blog", error: error.message });
+    return res.status(500).json({ message: "Failed to delete blog" });
   }
 });
 

@@ -28,16 +28,19 @@ function HomePage() {
     try {
       let token = await verify();
 
-      const blogsResponse = await axios.get("https://random-blogs.onrender.com/api/blogs", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const blogsResponse = await axios.get(
+        "https://random-blogs.onrender.com/api/blogs",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (blogsResponse.data && blogsResponse.data.length > 0) {
         setBlogs(blogsResponse.data);
       } else {
         console.error("No blogs found.");
-        setBlogs([]); // Handle no blogs case gracefully
+        setBlogs([]);
       }
     } catch (error) {
       console.error("Error during data fetching:", error);
@@ -48,7 +51,7 @@ function HomePage() {
   const handleDeleteBlog = async (id) => {
     try {
       let token = await verify();
-      console.log("handle delte", token);
+      console.log("handle delete", token);
       const response = await axios.delete(
         `https://random-blogs.onrender.com/api/blogs/delete/${id}`,
         {

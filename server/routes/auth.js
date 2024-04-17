@@ -6,7 +6,6 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-// Signup API with validation
 router.post(
   "/signup",
   [
@@ -42,16 +41,13 @@ router.post(
 
       const user = new User({ name, email, password: hashedPassword });
       await user.save();
-      res.status(200).json({ message: "User created successfully" });
+      return res.status(200).json({ message: "User created successfully" });
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error registering user", error: error.message });
+      return res.status(500).json({ message: "Error registering user" });
     }
   }
 );
 
-// Login API with validation
 router.post(
   "/login",
   [
@@ -88,15 +84,13 @@ router.post(
         }
       );
 
-      res.json({
+      return res.json({
         message: "Login successful",
         token,
         user: { id: user._id, name: user.name, email: user.email },
       });
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error logging in", error: error.message });
+      return res.status(500).json({ message: "Error logging in" });
     }
   }
 );
@@ -111,10 +105,8 @@ router.post("/verify", (req, res) => {
     if (err) {
       return res.status(401).json({ message: "Invalid token" });
     }
-    res.json({ message: "Token is valid", userId: decoded.id });
+    return res.json({ message: "Token is valid", userId: decoded.id });
   });
 });
-
-module.exports = router;
 
 module.exports = router;

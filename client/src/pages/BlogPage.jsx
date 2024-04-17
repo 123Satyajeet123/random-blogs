@@ -20,7 +20,6 @@ function BlogPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Retrieve the JWT from storage to send as part of the headers for authorization
       const token = localStorage.getItem("token");
       console.log(blogData);
       const response = await axios.post(
@@ -34,15 +33,12 @@ function BlogPage() {
       );
       if (response.status === 200) {
         console.log("Blog created successfully:", response.data);
-        navigate("/"); // Redirect to the home page after successful creation
+        navigate("/");
       } else {
         console.error("Failed to create blog:", response.data);
       }
     } catch (error) {
-      console.error(
-        "Error creating blog:",
-        error.response ? error.response.data : "No response"
-      );
+      console.error("Error creating blog:");
     }
   };
 

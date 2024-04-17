@@ -10,7 +10,7 @@ function SignupPage() {
     name: "",
   });
 
-  const navigate = useNavigate(); // Hook for programmatically navigating
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setUserDetails({
@@ -33,18 +33,11 @@ function SignupPage() {
         userDetails
       );
       console.log(response);
-      if(response.status==200){
-        navigate("/login")
+      if (response.status == 200) {
+        navigate("/login");
       }
     } catch (error) {
-      console.error(
-        "Signup error:",
-        error.response ? error.response.data : "No response"
-      );
-      if (error.response && error.response.status === 400) {
-        // Redirect to login page if user already exists
-        history.push("/login");
-      }
+      console.error("Signup error");
     }
   };
 

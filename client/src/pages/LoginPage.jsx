@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios"; // Ensure axios is installed for HTTP requests
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -15,38 +15,30 @@ function LoginPage() {
     });
   };
 
-  const navigate = useNavigate(); // Hook for programmatically navigating
+  const navigate = useNavigate();
 
-  // Handle form submission
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
+    event.preventDefault();
 
-    // Simple validation
     if (!userDetails.email || !userDetails.password) {
       alert("All fields are required");
       return;
     }
 
     try {
-      // Attempt to log in by sending a POST request to your authentication API
       const response = await axios.post(
         "https://random-blogs.onrender.com/api/auth/login",
         userDetails
       );
       if (response.data.token) {
-        console.log("Login successful:", response.data.user.id);
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userId", response.data.user.id); // Store user ID during login
-
+        localStorage.setItem("userId", response.data.user.id);
         navigate("/");
       } else {
         throw new Error("Token not provided");
       }
     } catch (error) {
-      console.error(
-        "Login error:",
-        error.response ? error.response.data : "No response"
-      );
+      console.error("Login error:");
     }
   };
 

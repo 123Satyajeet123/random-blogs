@@ -7,8 +7,6 @@ import SignupPage from "./pages/SignupPage";
 import BlogPage from "./pages/BlogPage";
 import ViewBlogPage from "./pages/ViewPage";
 
-// import BlogDetailsPage from './pages/BlogDetailsPage';
-// import CreateBlogPage from './pages/CreateBlogPage';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   return (
