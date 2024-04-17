@@ -36,6 +36,8 @@ function HomePage() {
           },
         }
       );
+
+      console.log(blogsResponse.data)
       if (blogsResponse.data && blogsResponse.data.length > 0) {
         setBlogs(blogsResponse.data);
       } else {
